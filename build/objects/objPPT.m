@@ -52,10 +52,15 @@ classdef objPPT < handle & dynamicAllocator
             end
         end
         
-        function addSlide(obj, layout)
+        function addSlide(obj, layout, index)
             % addSlide - Method to add a slide to the PowerPoint object. 
             %   Adds the a SlideDeck struct if it doesn't already exist
             %   and stores slides in the struct as they are generated.
+            if ~exist('index', 'var')
+                index = obj.ActivePresentation.Slides.Count+1;
+            end
+            
+            
             obj.dynamicAssignSingle('SlideDeck');
             
             slideregex =... %This is done to combat regex reserved chars
@@ -76,11 +81,13 @@ classdef objPPT < handle & dynamicAllocator
                 obj.ActivePresentation.Slides.Count+1);
             
             slide = objSlide(...
-                obj.ActivePresentation.Slides.AddSlide(numel(obj.SlideDeck)+1, layout));
+                obj.ActivePresentation.Slides.AddSlide(...
+                    index, layout));
             
             obj.SlideDeck.(slidelabel) = slide;
                 
         end
+        % TODO: Add methods to handle duplicating/selecting/copying/moving
         
         function closePPT(obj)
             obj.ActivePresentation.Close;

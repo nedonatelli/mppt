@@ -1,4 +1,6 @@
 classdef dynamicAllocator < dynamicprops
+% DYNAMICALLOCATOR Class that handles the dynamic allocation of properties
+% and methods to the ActiveX PowerPoint-related MATLAB classes
     properties
         object
         invoke

@@ -8,8 +8,9 @@ ppt.applyTemplate(template);
 disp(ppt.AvailableLayouts);
 
 ppt.addSlide('Title');
-ppt.addSlide('Blank');
-ppt.addSlide('Title + 1 column');
+ppt.addSlide('Blank', 2);
+ppt.addSlide('Title + 1 column', 2);
+ppt.SlideDeck.slide1.writeText('Title_1', 'test text \n with 2 lines');
 
 ppt.saveasPPT(fullfile(pwd, 'test.pptx'));
 ppt.savePPT;
