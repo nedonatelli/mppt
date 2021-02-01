@@ -14,3 +14,5 @@ MATLAB's [anonymous function handle](https://www.mathworks.com/help/matlab/matla
 [OfficeMatlabCookbook](https://github.com/zglin/OfficeMatlabCookbook)
 
 [PowerPoint Visual Basic for Applications Reference](https://docs.microsoft.com/en-us/office/vba/api/overview/powerpoint)
+
+Currently a student trying to share helpful code for others to use.
