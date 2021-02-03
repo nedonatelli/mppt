@@ -5,12 +5,17 @@ ppt.openPPT();
 template = 'G:\Documents\Custom Office Templates\testTemplate2.pptx';
 ppt.applyTemplate(template);
 
-disp(ppt.AvailableLayouts);
+%disp(ppt.AvailableLayouts);
 
 ppt.addSlide('Title');
 ppt.addSlide('Blank', 2);
 ppt.addSlide('Title + 1 column', 2);
 ppt.SlideDeck.slide1.writeText('Title_1', 'test text \n with 2 lines');
+
+fig = figure; imagesc(randn(100, 100));
+print(fig, '-clipboard', '-dmeta')
+
+ppt.SlideDeck.slide3.addFigure(fig, 0, 0, 200);
 
 ppt.saveasPPT(fullfile(pwd, 'test.pptx'));
 ppt.savePPT;
@@ -22,3 +27,5 @@ ppt.savePPT;
 % ppt.SlideDeck.slide1.object.Select
 % ppt.SlideDeck.slide1.object.Copy
 % ppt.SlideDeck.slide1.object.MoveTo(2)
+
+
