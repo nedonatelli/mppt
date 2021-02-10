@@ -15,7 +15,10 @@ ppt.SlideDeck.slide1.writeText('Title_1', 'test text \n with 2 lines');
 fig = figure; imagesc(randn(100, 100));
 print(fig, '-clipboard', '-dmeta')
 
-ppt.SlideDeck.slide3.addFigure(fig, 0, 0, 200);
+ppt.SlideDeck.slide3.addFigure(fig, 100, 200, 200);
+ppt.SlideDeck.slide3.addShape('Rectangle', 300, 200, 100, 200);
+ppt.SlideDeck.slide3.fillShape('Rectangle_4', 'no fill');
+ppt.SlideDeck.slide3.lineColor('Rectangle_4', [000000000]); % 2147483648 is white
 
 ppt.saveasPPT(fullfile(pwd, 'test.pptx'));
 ppt.savePPT;

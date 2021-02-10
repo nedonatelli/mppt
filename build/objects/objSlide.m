@@ -35,7 +35,7 @@ classdef objSlide < handle & dynamicAllocator
             obj.children.(childname).TextFrame.TextRange.Text = text{1};
         end
         
-        function addFigure(obj, fig, top, left, height)
+        function addFigure(obj, fig, left, top, height)
             % ADDFIGURE adds a figure from a figure handle in MATLAB to the
             % selected slide.
             % Can also move the figure to location defined by top & left as
@@ -53,6 +53,44 @@ classdef objSlide < handle & dynamicAllocator
             
             obj.moveChild(childname, top, left); %Move the new image to the location top, left
             obj.resizeChild(childname, height); %Resize the 
+        end
+        
+        function addShape(obj, shape, left, top, width, height)
+            obj.Select();
+            obj.Shapes.AddShape(sprintf('msoShape%s', shape), left, top, width, height);
+            obj.findChildren();
+        end
+        
+        function fillShape(obj, childname, fill_color)
+            obj.Select();
+            if ischar(fill_color)
+                if strcmp(fill_color, 'no fill')
+                    obj.children.(childname).Fill.Visible = false;
+                else
+                    warning('Unexpected String Argument')
+                end
+                obj.findChildren();
+                return
+            end
+            
+            obj.children.(childname).Fill.ForeColor.RGB = fill_color;
+            obj.findChildren();
+        end
+        
+        function lineColor(obj, childname, line_color)
+            obj.Select();
+            if ischar(line_color)
+                if strcmp(fill_color, 'no fill')
+                    obj.children.(childname).Line.Visible = false;
+                else
+                    warning('Unexpected String Argument')
+                end
+                obj.findChildren();
+                return
+            end
+            
+            obj.children.(childname).Line.ForeColor.RGB = line_color;
+            obj.findChildren();
         end
         
         function moveChild(obj, childname, top, left)
