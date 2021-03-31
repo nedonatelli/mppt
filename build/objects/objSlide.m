@@ -55,6 +55,21 @@ classdef objSlide < handle & dynamicAllocator
             obj.resizeChild(childname, height); %Resize the 
         end
         
+        function addImage(obj, fig, left, top, height)
+            obj.Select();%Select the slide
+            saveas(fig, 'tmp.jpg');
+            obj.Shapes.AddPicture(fullfile(pwd, 'tmp.jpg'), 0, 1, left, top);
+            delete('tmp.jpg');
+            close(fig);
+            obj.findChildren(); %Update the children for the slide
+            iChild = obj.Shapes.count; %Get the new number of children
+            childname = obj.Shapes.Item(iChild).Name; %Get the name of new child
+            childname = regexprep(childname, ' ', '_'); %Swap spaces for underscores
+            
+            obj.moveChild(childname, top, left); %Move the new image to the location top, left
+            obj.resizeChild(childname, height); %Resize the 
+        end
+        
         function addShape(obj, shape, left, top, width, height)
             obj.Select();
             obj.Shapes.AddShape(sprintf('msoShape%s', shape), left, top, width, height);
